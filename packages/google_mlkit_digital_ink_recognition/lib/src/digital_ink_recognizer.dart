@@ -153,6 +153,13 @@ class RecognitionCandidate {
   RecognitionCandidate({required this.text, required this.score});
 
   /// Returns an instance of [RecognitionCandidate] from a given [json].
+  ///
+  /// `score` is declared as `double` but native platforms may return it as an
+  /// integer (e.g. `0`, `1`) when the underlying model emits whole-number
+  /// scores. Cast via `num` so both ints and doubles are accepted.
   factory RecognitionCandidate.fromJson(Map<dynamic, dynamic> json) =>
-      RecognitionCandidate(text: json['text'], score: json['score']);
+      RecognitionCandidate(
+        text: json['text'] as String,
+        score: (json['score'] as num).toDouble(),
+      );
 }
