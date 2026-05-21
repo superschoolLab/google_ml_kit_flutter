@@ -173,6 +173,18 @@ class DigitalInkRecognizer : MethodChannel.MethodCallHandler {
         call: MethodCall,
         result: MethodChannel.Result,
     ) {
+        // Kotlin migration (9d4b21f) left this body empty, so every Dart-side
+        // ModelManager call (isModelDownloaded / downloadModel / deleteModel)
+        // hung forever on Android because the MethodChannel.Result was never
+        // resolved. Delegate to GenericModelManager to match the Java upstream
+        // and the iOS Swift behaviour.
+        val tag = call.argument<String>("model")
+        if (tag == null) {
+            result.error("invalid_args", "Missing 'model' argument", null)
+            return
+        }
+        val model = getModel(tag, result) ?: return
+        genericModelManager.manageModel(model, call, result)
     }
 
     private fun closeDetector(call: MethodCall) {
