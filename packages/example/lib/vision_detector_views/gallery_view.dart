@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -10,12 +9,11 @@ import 'utils.dart';
 
 class GalleryView extends StatefulWidget {
   GalleryView(
-      {Key? key,
+      {super.key,
       required this.title,
       this.text,
       required this.onImage,
-      required this.onDetectorViewModeChanged})
-      : super(key: key);
+      required this.onDetectorViewModeChanged});
 
   final String title;
   final String? text;
@@ -117,9 +115,9 @@ class _GalleryViewState extends State<GalleryView> {
   }
 
   Future _getImageAsset() async {
-    final manifestContent = await rootBundle.loadString('AssetManifest.json');
-    final Map<String, dynamic> manifestMap = json.decode(manifestContent);
-    final assets = manifestMap.keys
+    final assetManifest = await AssetManifest.loadFromAssetBundle(rootBundle);
+    final List<String> assets = assetManifest
+        .listAssets()
         .where((String key) => key.contains('images/'))
         .where((String key) =>
             key.contains('.jpg') ||

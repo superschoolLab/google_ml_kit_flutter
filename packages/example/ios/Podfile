@@ -23,15 +23,16 @@ def flutter_root
 end
 
 require File.expand_path(File.join('packages', 'flutter_tools', 'bin', 'podhelper'), flutter_root)
+require File.expand_path('../../google_mlkit_commons/ios/scripts/apple_silicon_simulator', __dir__)
 
 flutter_ios_podfile_setup
 
 target 'Runner' do
   # Add language package you need to use
-  pod 'GoogleMLKit/TextRecognitionChinese', '~> 7.0.0'
-  pod 'GoogleMLKit/TextRecognitionDevanagari', '~> 7.0.0'
-  pod 'GoogleMLKit/TextRecognitionJapanese', '~> 7.0.0'
-  pod 'GoogleMLKit/TextRecognitionKorean', '~> 7.0.0'
+  pod 'GoogleMLKit/TextRecognitionChinese', '~> 9.0.0'
+  pod 'GoogleMLKit/TextRecognitionDevanagari', '~> 9.0.0'
+  pod 'GoogleMLKit/TextRecognitionJapanese', '~> 9.0.0'
+  pod 'GoogleMLKit/TextRecognitionKorean', '~> 9.0.0'
 
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
 end
@@ -56,4 +57,6 @@ post_install do |installer|
       end
     end
   end
+
+  mlkit_apple_silicon_simulator_patch(installer)
 end

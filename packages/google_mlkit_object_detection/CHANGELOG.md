@@ -1,3 +1,10 @@
+## 0.15.1
+
+* Update Android native library `com.google.mlkit:object-detection` to 17.0.2
+* Update Android native library `com.google.mlkit:object-detection-custom` to 17.0.2
+* Update iOS native library `GoogleMLKit/ObjectDetection` to 9.0.0
+* Update iOS native library `GoogleMLKit/ObjectDetectionCustom` to 9.0.0
+
 ## 0.15.0
 
 * Increase android sdk compile version to 35
@@ -57,7 +64,7 @@
 ## 0.5.0
 
 * Update dependencies.
-* __BREAKING:__ For remote firebase-hosted models in iOS, you must now explicitly add the `GoogleMLKit/LinkFirebase` pod and preprocessor flag to your Podfile. This removes an unnecessary dependency on FirebaseCore for those who do not need to use remote models. Please see the updated README for instructions.
+* __BREAKING:__ For remote firebase-hosted models in iOS, you must now explicitly add the `GoogleMLKit/LinkFirebase` pod to your Podfile. The Swift implementation uses `canImport(MLKitLinkFirebase)` (no preprocessor macro required). This removes an unnecessary dependency on FirebaseCore for those who do not need to use remote models. Please see the updated README for instructions.
 
 ## 0.4.0
 

@@ -83,6 +83,8 @@ Notice that the minimum `IPHONEOS_DEPLOYMENT_TARGET` is 15.5, you can set it to 
 - targetSdkVersion: 35
 - compileSdkVersion: 35
 
+**⚠️ Production Disclaimer:** Using this plugin in production is the responsibility of the developers consuming the plugin, not the authors. The authors provide this plugin as-is and are not responsible for any issues, failures, or compatibility problems that may arise from using this plugin in production environments.
+
 ### Supported languages
 
 The ML Kit Text Recognition API can recognize text in any Chinese, Devanagari, Japanese, Korean and Latin character set. Supported languages can be found [here](https://developers.google.com/ml-kit/vision/text-recognition/v2/languages).
@@ -99,10 +101,10 @@ For the iOS platform add to the `ios/Podfile` file:
 
 ```ruby
 # Add language package you need to use
-pod 'GoogleMLKit/TextRecognitionChinese', '~> 7.0.0'
-pod 'GoogleMLKit/TextRecognitionDevanagari', '~> 7.0.0'
-pod 'GoogleMLKit/TextRecognitionJapanese', '~> 7.0.0'
-pod 'GoogleMLKit/TextRecognitionKorean', '~> 7.0.0'
+pod 'GoogleMLKit/TextRecognitionChinese', '~> 9.0.0'
+pod 'GoogleMLKit/TextRecognitionDevanagari', '~> 9.0.0'
+pod 'GoogleMLKit/TextRecognitionJapanese', '~> 9.0.0'
+pod 'GoogleMLKit/TextRecognitionKorean', '~> 9.0.0'
 ```
 
 For the Android platform add to the `android/app/build.gradle` file:
@@ -110,10 +112,10 @@ For the Android platform add to the `android/app/build.gradle` file:
 ```gradle
 dependencies {
     // Add language package you need to use
-    implementation 'com.google.mlkit:text-recognition-chinese:16.0.0'
-    implementation 'com.google.mlkit:text-recognition-devanagari:16.0.0'
-    implementation 'com.google.mlkit:text-recognition-japanese:16.0.0'
-    implementation 'com.google.mlkit:text-recognition-korean:16.0.0'
+    implementation 'com.google.mlkit:text-recognition-chinese:16.0.1'
+    implementation 'com.google.mlkit:text-recognition-devanagari:16.0.1'
+    implementation 'com.google.mlkit:text-recognition-japanese:16.0.1'
+    implementation 'com.google.mlkit:text-recognition-korean:16.0.1'
 }
 ```
 

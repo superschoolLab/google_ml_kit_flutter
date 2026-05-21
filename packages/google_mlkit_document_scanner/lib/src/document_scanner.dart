@@ -2,8 +2,9 @@ import 'package:flutter/services.dart';
 
 /// A document scanner that allows to convert physical documents into digital formats.
 class DocumentScanner {
-  static const MethodChannel _channel =
-      MethodChannel('google_mlkit_document_scanner');
+  static const MethodChannel _channel = MethodChannel(
+    'google_mlkit_document_scanner',
+  );
 
   /// Instance id.
   final id = DateTime.now().microsecondsSinceEpoch.toString();
@@ -17,10 +18,9 @@ class DocumentScanner {
   /// Starts the document scanner UI flow.
   Future<DocumentScanningResult> scanDocument() async {
     final dynamic results = await _channel.invokeMapMethod<dynamic, dynamic>(
-        'vision#startDocumentScanner', <String, dynamic>{
-      'options': options.toJson(),
-      'id': id,
-    });
+      'vision#startDocumentScanner',
+      <String, dynamic>{'options': options.toJson(), 'id': id},
+    );
     return DocumentScanningResult.fromJson(results);
   }
 
@@ -35,7 +35,7 @@ class DocumentScanner {
 class DocumentScannerOptions {
   /// Constructor for [DocumentScannerOptions].
   DocumentScannerOptions({
-    this.documentFormat = DocumentFormat.jpeg,
+    this.documentFormats = const {DocumentFormat.jpeg},
     this.pageLimit = 1,
     this.mode = ScannerMode.full,
     this.isGalleryImport = false,
@@ -46,7 +46,7 @@ class DocumentScannerOptions {
 
   /// Sets scanner result formats.
   /// Available formats: PDF, JPG and default format is JPG.
-  final DocumentFormat documentFormat;
+  final Set<DocumentFormat> documentFormats;
 
   /// Sets the scanner mode which determines what features are enabled. default = ScannerModel.full.
   final ScannerMode mode;
@@ -56,25 +56,18 @@ class DocumentScannerOptions {
 
   /// Returns a json representation of an instance of [DocumentScannerOptions].
   Map<String, dynamic> toJson() => {
-        'pageLimit': pageLimit,
-        'format': documentFormat.name,
-        'mode': mode.name,
-        'isGalleryImport': isGalleryImport,
-      };
+    'pageLimit': pageLimit,
+    'formats': documentFormats.map((f) => f.name).toList(),
+    'mode': mode.name,
+    'isGalleryImport': isGalleryImport,
+  };
 }
 
 /// Result format for the scanner.
-enum DocumentFormat {
-  jpeg,
-  pdf,
-}
+enum DocumentFormat { jpeg, pdf }
 
 /// Scanner mode which determines what features are enabled.
-enum ScannerMode {
-  base,
-  filter,
-  full,
-}
+enum ScannerMode { base, filter, full }
 
 /// Result for document scanning.
 class DocumentScanningResult {
@@ -82,7 +75,7 @@ class DocumentScanningResult {
   final DocumentScanningResultPdf? pdf;
 
   /// Returns the scanned images or null if `DocumentFormat.jpeg` was not specified when creating the scanner options.
-  final List<String> images;
+  final List<String>? images;
 
   /// Constructor to create an instance of [DocumentScanningResult].
   DocumentScanningResult({required this.pdf, required this.images});
@@ -118,7 +111,9 @@ class DocumentScanningResultPdf {
   /// Returns an instance of [DocumentScanningResultPdf] from a given [json].
   factory DocumentScanningResultPdf.fromJson(Map<dynamic, dynamic> json) {
     return DocumentScanningResultPdf(
-        pageCount: json['pageCount'], uri: json['uri']);
+      pageCount: json['pageCount'],
+      uri: json['uri'],
+    );
   }
 
   @override

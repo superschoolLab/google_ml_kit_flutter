@@ -1,3 +1,10 @@
+## 0.14.2
+
+* Update Android native library `com.google.mlkit:image-labeling` to 17.0.9
+* Update Android native library `com.google.mlkit:image-labeling-custom` to 17.0.3
+* Update iOS native library `GoogleMLKit/ImageLabeling` to 9.0.0
+* Update iOS native library `GoogleMLKit/ImageLabelingCustom` to 9.0.0
+
 ## 0.14.1
 
 * Increase android sdk compile version to 35
@@ -57,7 +64,7 @@
 ## 0.4.0
 
 * Update dependencies.
-* __BREAKING:__ For remote firebase-hosted models in iOS, you must now explicitly add the `GoogleMLKit/LinkFirebase` pod and preprocessor flag to your Podfile. This removes an unnecessary dependency on FirebaseCore for those who do not need to use remote models. Please see the updated README for instructions.
+* __BREAKING:__ For remote firebase-hosted models in iOS, you must now explicitly add the `GoogleMLKit/LinkFirebase` pod to your Podfile. The Swift implementation uses `canImport(MLKitLinkFirebase)` (no preprocessor macro required). This removes an unnecessary dependency on FirebaseCore for those who do not need to use remote models. Please see the updated README for instructions.
 
 ## 0.3.0
 

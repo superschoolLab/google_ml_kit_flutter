@@ -1,3 +1,8 @@
+## 0.14.2
+
+* Update Android native library `com.google.mlkit:digital-ink-recognition` to 19.0.0
+* Update iOS native library `GoogleMLKit/DigitalInkRecognition` to 9.0.0
+
 ## 0.14.1
 
 * Increase android sdk compile version to 35
