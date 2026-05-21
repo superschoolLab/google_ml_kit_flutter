@@ -26,6 +26,12 @@ class GoogleMlKitDigitalInkRecognitionPlugin :
     }
 
     companion object {
-        private const val CHANNEL_NAME = "google_mlkit_digital_ink_recognition"
+        // Must match the channel name used by Dart side
+        // (packages/google_mlkit_digital_ink_recognition/lib/src/digital_ink_recognizer.dart).
+        // Kotlin migration (9d4b21f) accidentally used "_recognition" instead of
+        // "_recognizer", which broke the channel on Android with:
+        //   MissingPluginException(No implementation found for method
+        //   vision#manageInkModels on channel google_mlkit_digital_ink_recognizer)
+        private const val CHANNEL_NAME = "google_mlkit_digital_ink_recognizer"
     }
 }
